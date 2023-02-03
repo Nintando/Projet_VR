@@ -7,14 +7,17 @@ public class Pistol : MonoBehaviour
 {
     [SerializeField] GameObject firepoint;
     [SerializeField] float pistoldamage = 15f;
-    // [SerializeField] GameObject hitFxPrefab;
+     //[SerializeField] GameObject hitFxPrefab;
     [SerializeField] int bulletMax = 7;
     [SerializeField] TextMeshProUGUI currentAmmoUI ;
     [SerializeField] TextMeshProUGUI maxAmmoUI;
+    //[SerializeField] AudioClip shootSound;
     int currentBullet;
+    AudioSource audioSource;
     private void Start()
     {
         currentBullet = bulletMax;
+        audioSource = GetComponent<AudioSource>();
         maxAmmoUI.text = bulletMax.ToString("00");
         currentAmmoUI.text = currentBullet.ToString("00");
     }
@@ -23,12 +26,14 @@ public class Pistol : MonoBehaviour
         if (currentBullet <= 0) return;
         Debug.Log("shoot");
         currentBullet--;
+        audioSource.Play();
+
         currentAmmoUI.text = currentBullet.ToString("00");
         RaycastHit hitinfo;
 
         bool hit = Physics.Raycast(firepoint.transform.position, firepoint.transform.forward, out hitinfo);
         //if (hit){
-           // GameObject fx = Instantiate(hitFxPrefab, hitinfo.point, Quaternion.Euler(firepoint.transform.forward));
+        // GameObject fx = Instantiate(hitFxPrefab, hitinfo.point, Quaternion.Euler(firepoint.transform.forward));
         //}
         if(hit && hitinfo.collider.tag == "Destructible")
         {
@@ -53,9 +58,4 @@ public class Pistol : MonoBehaviour
         currentBullet = bulletMax;
         currentAmmoUI.text = currentBullet.ToString("00");
     }
-
-
-      
-  
-
 }

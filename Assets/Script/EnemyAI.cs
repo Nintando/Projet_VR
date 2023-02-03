@@ -27,15 +27,7 @@ public class EnemyAI : MonoBehaviour
         Attack();
 
 
-        /* Function to stop enemy in front of the player 
-         * 
-         * float distance = Vector3.Distance(transform.position, player.transform.position);
-         * 
-         * if (distance < 5f )
-         * {
-                nma.isStopped = true;
-         *  }
-         */
+     
     }
 
     private void Attack()
