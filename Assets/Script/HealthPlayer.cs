@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthPlayer : MonoBehaviour
 {
@@ -18,10 +19,11 @@ public class HealthPlayer : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        Debug.Log(currentHealth);
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Dead");
+            SceneManager.LoadScene(2);
         }
     }
 }

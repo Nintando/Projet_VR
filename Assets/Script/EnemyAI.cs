@@ -7,10 +7,12 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private Animator animator;
+    [SerializeField] float range = 3;
 
     private NavMeshAgent nma;
     private float t;
     private float attackDelay;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +27,6 @@ public class EnemyAI : MonoBehaviour
         Movement();
         Animation();
         Attack();
-
-
-     
     }
 
     private void Attack()
@@ -36,7 +35,7 @@ public class EnemyAI : MonoBehaviour
         {
             t += Time.deltaTime;
 
-            if(t >= attackDelay)
+            if (t >= attackDelay)
             {
                 animator.SetTrigger("Attack");
 
@@ -52,7 +51,17 @@ public class EnemyAI : MonoBehaviour
 
     private void Movement()
     {
-        nma.SetDestination(player.transform.position);
+        float dist = Vector3.Distance(player.transform.position, transform.position);
+        Debug.Log(dist <= range);
+        if (dist <= range)
+        {
+            nma.SetDestination(player.transform.position);
+        }
+        else
+        {
+            nma.isStopped = false;
+        }
+
     }
 
     private bool isInRange()

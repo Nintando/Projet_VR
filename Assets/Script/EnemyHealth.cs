@@ -5,21 +5,47 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
 
+
     [SerializeField] float health = 50;
+    private Rigidbody[] _ragdollRigidbodies;
     // Start is called before the first frame update
+    public void Awake()
+    {
+        _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
+        DisableRagdoll();
+    }
+
+    
+
+    private void EnableRagdoll()
+    {
+        foreach (var rigidbody in _ragdollRigidbodies)
+        {
+            rigidbody.isKinematic = false;
+        }
+    }
+
+    private void DisableRagdoll()
+    {
+        foreach (var rigidbody in _ragdollRigidbodies)
+        {
+            rigidbody.isKinematic = true;
+        }
+    }
+
     public void TakeDamage(float amount, GameObject bodyPartHit)
     {
         float totalDamage = 0;
-        
+
         if (bodyPartHit.tag == "untagged")
         {
-             totalDamage = amount;
+            totalDamage = amount;
         }
-    
+
 
         if (bodyPartHit.tag == "Head")
         {
-            totalDamage = amount* .3f;
+            totalDamage = amount * .3f;
         }
         if (bodyPartHit.tag == "Armor")
         {
@@ -31,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
         health = -totalDamage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            EnableRagdoll();
         }
 
 
@@ -39,5 +65,5 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-    
+
 }
