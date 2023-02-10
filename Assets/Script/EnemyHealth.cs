@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -55,9 +57,11 @@ public class EnemyHealth : MonoBehaviour
 
 
         health = -totalDamage;
-        if (health <= 0)
+        if (health <= 0 && bodyPartHit.tag == "Bob")
         {
+
             EnableRagdoll();
+            SceneManager.LoadScene(1);
         }
 
 

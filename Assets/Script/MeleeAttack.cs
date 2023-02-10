@@ -10,10 +10,12 @@ public class MeleeAttack : MonoBehaviour
 
         private void OnTriggerEnter(Collider other)
         {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" || other.tag == "Bob")
         {
             Debug.Log(other.transform.gameObject.name);
+            other.GetComponent<Animator>().enabled = false;
             other.GetComponent<EnemyHealth>().TakeDamage(dmg, other.gameObject);
+
         }
             
         }

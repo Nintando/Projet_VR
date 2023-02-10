@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Head
   - Armor
+  - Bob
   layers:
   - Default
   - TransparentFX
