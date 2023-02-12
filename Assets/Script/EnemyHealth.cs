@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
         DisableRagdoll();
     }
 
-    
+
 
     private void EnableRagdoll()
     {
@@ -59,15 +59,16 @@ public class EnemyHealth : MonoBehaviour
         health = -totalDamage;
         if (health <= 0 && bodyPartHit.tag == "Bob")
         {
-
+            GetComponent<Animator>().enabled = false;
             EnableRagdoll();
             SceneManager.LoadScene(1);
         }
-
-
+        else
+        {
+            GetComponent<Animator>().enabled = false;
+            EnableRagdoll();
+        }
 
 
     }
-
-
 }
